@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | Signal Toolkit</title>
+<meta name="description" content="Signal Toolkit's privacy policy: how our free browser-based tools handle your data (they don't — everything runs locally).">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://signal-qr.example.com/privacy.html">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header" role="banner">
+  <div class="wrap header-row">
+    <a href="index.html" class="brand" aria-label="Signal Toolkit — home">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      Signal
+    </a>
+  </div>
+</header>
+<main>
+  <section>
+    <div class="wrap" style="max-width:760px; padding:60px 24px;">
+      <h1>Privacy Policy</h1>
+      <p class="section-lede">Last updated 2026. Signal Toolkit is a static, frontend-only site — this policy is short because there isn't much to say.</p>
+
+      <h2>What we collect</h2>
+      <p>Nothing. Any content you type or upload into a Signal tool — URLs, WiFi passwords, contact details, or image files — is processed entirely in your browser using JavaScript. It is never transmitted to a server, because this site has no server-side component or backend of any kind, for any tool.</p>
+
+      <h2>Local storage</h2>
+      <p>Some tools save history, favorites, or preferences using your browser's local storage, a feature built into every modern browser. This data stays on your device and is never uploaded anywhere. Clearing your browser data, or using a tool's built-in "Clear" option, removes it.</p>
+
+      <h2>Images and files</h2>
+      <p>Tools like the Image Compressor read files you select using your browser's File API and process them on your device's own processor. At no point is an image file, or any part of it, sent over the network.</p>
+
+      <h2>Cookies</h2>
+      <p>This site does not set tracking or advertising cookies.</p>
+
+      <h2>Third-party fonts and libraries</h2>
+      <p>Google Fonts, and small open-source JavaScript libraries loaded from a public CDN, are used to display typography and power certain tools. Loading these resources may expose your IP address to the hosting provider in the same way any external resource request does. No content you enter into a tool is sent alongside these requests.</p>
+
+      <h2>Contact</h2>
+      <p>Questions about this policy can be sent to <a href="mailto:hello@signal-qr.example.com">hello@signal-qr.example.com</a>.</p>
+
+      <p><a href="index.html">← Back to Signal Toolkit</a></p>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    <p>© <span id="footer-year"></span> Signal Toolkit.</p>
+  </div>
+</footer>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

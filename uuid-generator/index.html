@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Free UUID / GUID Generator — Bulk v4 &amp; v1, Instant Validator | Signal</title>
+<meta name="description" content="Generate UUIDs and GUIDs free, in your browser. Create 1 to 100 Version 4 (random) or Version 1 (time-based) UUIDs at once, validate any UUID instantly, and export to TXT or CSV. No signup, nothing uploaded.">
+<meta name="keywords" content="UUID generator, GUID generator, UUID v4 generator, UUID v1 generator, bulk UUID generator, online UUID generator, UUID validator, free GUID generator, generate UUID online">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://signal-qr.example.com/uuid-generator/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Signal — Free UUID / GUID Generator">
+<meta property="og:description" content="Generate up to 100 UUIDs at once (v4 random or v1 time-based), validate any UUID, and export to TXT or CSV. Free, private, and instant — runs entirely in your browser.">
+<meta property="og:url" content="https://signal-qr.example.com/uuid-generator/">
+<meta property="og:site_name" content="Signal Toolkit">
+<meta property="og:image" content="https://signal-qr.example.com/og-image.png">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Signal — Free UUID / GUID Generator">
+<meta name="twitter:description" content="Generate up to 100 UUIDs at once, validate any UUID, and export to TXT or CSV. Free, private, and instant.">
+<meta name="twitter:image" content="https://signal-qr.example.com/og-image.png">
+
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%2230%22 height=%2230%22 x=%225%22 y=%225%22 fill=%22%23000000%22/><rect width=%2230%22 height=%2230%22 x=%2265%22 y=%225%22 fill=%22%236E6E73%22/><rect width=%2230%22 height=%2230%22 x=%225%22 y=%2265%22 fill=%22%23AEAEB2%22/></svg>">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<!-- Structured Data: WebApplication -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Signal UUID / GUID Generator",
+  "url": "https://signal-qr.example.com/uuid-generator/",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "Any (runs in browser)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+  "description": "A free browser-based UUID and GUID generator supporting Version 4 (random) and Version 1 (time-based) UUIDs, bulk generation up to 100 at a time, a built-in UUID validator, and TXT/CSV export.",
+  "featureList": "UUID v4 and v1 generation; bulk generate 1, 5, 10, 25, 50, or 100 at once; uppercase, no-hyphen, and braces formatting; copy individual or all UUIDs; download as TXT or CSV; auto-regenerate mode; UUID validator with version and variant detection; search/filter generated list; keyboard shortcuts"
+}
+</script>
+
+<!-- Structured Data: BreadcrumbList -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Signal Toolkit","item":"https://signal-qr.example.com/"},
+    {"@type":"ListItem","position":2,"name":"UUID / GUID Generator","item":"https://signal-qr.example.com/uuid-generator/"}
+  ]
+}
+</script>
+
+<!-- Structured Data: FAQPage -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"What is a UUID?","acceptedAnswer":{"@type":"Answer","text":"A UUID (Universally Unique Identifier) is a 128-bit number, usually written as 32 hex digits in five groups (8-4-4-4-12), used to identify information without needing a central authority to hand out IDs."}},
+    {"@type":"Question","name":"What is the difference between a UUID and a GUID?","acceptedAnswer":{"@type":"Answer","text":"They are effectively the same 128-bit identifier. GUID (Globally Unique Identifier) is Microsoft's name for the format, used across .NET and Windows, while UUID is the name used in the RFC 9562 standard followed everywhere else."}},
+    {"@type":"Question","name":"Is this UUID generator really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every version, batch size, formatting option, and export format on this page is free to use, with no signup and no limit on how many times you generate."}},
+    {"@type":"Question","name":"Are the UUIDs generated here truly random?","acceptedAnswer":{"@type":"Answer","text":"Version 4 UUIDs are generated using the Web Crypto API's getRandomValues, a cryptographically secure random number source built into your browser, not Math.random."}},
+    {"@type":"Question","name":"What is a Version 4 UUID?","acceptedAnswer":{"@type":"Answer","text":"A Version 4 UUID is generated from 122 random bits, with a handful of fixed bits marking its version and variant. It is the most common UUID type because it needs no coordination or shared state to avoid collisions."}},
+    {"@type":"Question","name":"What is a Version 1 UUID?","acceptedAnswer":{"@type":"Answer","text":"A Version 1 UUID encodes the creation timestamp plus a node identifier, traditionally a MAC address. Since browsers cannot read hardware MAC addresses, and RFC 9562 explicitly permits it, this tool substitutes a random node ID for privacy."}},
+    {"@type":"Question","name":"Can two UUIDs ever collide?","acceptedAnswer":{"@type":"Answer","text":"In theory yes, in practice no. A Version 4 UUID has about 5.3 x 10^36 possible values, so even generating billions per second for years leaves the odds of a collision effectively zero."}},
+    {"@type":"Question","name":"What are UUIDs commonly used for?","acceptedAnswer":{"@type":"Answer","text":"Database primary keys, distributed system record IDs, session tokens, file and object names, API request IDs, and any situation where multiple systems need to generate unique IDs independently."}},
+    {"@type":"Question","name":"Can I generate more than one UUID at a time?","acceptedAnswer":{"@type":"Answer","text":"Yes. Choose 1, 5, 10, 25, 50, or 100 UUIDs per batch, then copy them all, search within the list, or export the whole batch as a TXT or CSV file."}},
+    {"@type":"Question","name":"How do I validate a UUID?","acceptedAnswer":{"@type":"Answer","text":"Paste it into the validator on this page. It instantly checks the 8-4-4-4-12 format, reports whether it's valid, and identifies the version and variant, accepting values with or without surrounding braces."}},
+    {"@type":"Question","name":"Is it safe to use a UUID as a security token or password?","acceptedAnswer":{"@type":"Answer","text":"A Version 4 UUID's 122 random bits give it strong unpredictability, similar in strength to a long random token, but purpose-built secret generators are still recommended for passwords and API keys since UUIDs are designed for uniqueness, not secrecy guarantees."}},
+    {"@type":"Question","name":"What does the nil UUID mean?","acceptedAnswer":{"@type":"Answer","text":"The nil UUID, 00000000-0000-0000-0000-000000000000, is a special reserved value meaning no UUID is present, similar to how null represents an absent value in code."}},
+    {"@type":"Question","name":"Do the UUIDs generated here get sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. Every UUID is generated locally in your browser using JavaScript, and nothing you generate, validate, or export is ever transmitted anywhere."}},
+    {"@type":"Question","name":"What's the difference between uppercase and lowercase UUIDs?","acceptedAnswer":{"@type":"Answer","text":"Both represent the same value — hex digits are case-insensitive. RFC 9562 recommends lowercase for output, but some systems like older Microsoft tooling display GUIDs in uppercase; this generator supports either."}}
+  ]
+}
+</script>
+</head>
+<body>
+
+<a class="skip-link" href="#generator">Skip to UUID generator</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" role="banner">
+  <div class="wrap header-row">
+    <a href="../index.html" class="brand" aria-label="Signal — home">
+      <span class="brand-mark" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+      Signal
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <a href="../index.html">Home</a>
+      <a href="#generator">Generator</a>
+      <a href="#validator">Validator</a>
+      <a href="#learn">Learn</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+      <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <p class="eyebrow">Free · Private · Runs entirely in your browser</p>
+      <h1>UUIDs and GUIDs, generated instantly.</h1>
+      <p class="lede">Create Version 4 (random) or Version 1 (time-based) UUIDs, one at a time or up to 100 in a batch. Validate any UUID, export to TXT or CSV, and never send a single value to a server.</p>
+      <div class="hero-actions">
+        <a href="#generator" class="btn btn-primary">Generate UUIDs</a>
+        <a href="#validator" class="btn btn-ghost">Validate a UUID</a>
+      </div>
+      <ul class="hero-stats" aria-label="Key facts">
+        <li><strong>2</strong><span>UUID versions — v4 &amp; v1</span></li>
+        <li><strong>100</strong><span>Max UUIDs per batch</span></li>
+        <li><strong>0</strong><span>Data sent to a server</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ TRUST BADGES ============ -->
+  <section id="trust-badges" aria-label="Trust indicators">
+    <div class="wrap trust-row">
+      <span class="trust-badge">🔒 100% browser processing</span>
+      <span class="trust-badge">🚫 No data stored</span>
+      <span class="trust-badge">🎲 Cryptographically random</span>
+      <span class="trust-badge">♾️ Free forever</span>
+      <span class="trust-badge">⚡ Instant generation</span>
+      <span class="trust-badge">📱 Mobile optimized</span>
+    </div>
+  </section>
+
+  <!-- ============ GENERATOR ============ -->
+  <section class="generator-section" id="generator">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The generator</p>
+        <h2>Generate your UUIDs</h2>
+        <p class="section-lede">Pick a version and batch size, adjust formatting if you need it, and generate. Every UUID is created locally with the Web Crypto API.</p>
+      </div>
+
+      <div class="generator-grid">
+        <!-- Options panel -->
+        <div class="panel" id="options-panel">
+          <h3 class="panel-title">Options</h3>
+
+          <label class="field-label" id="version-label">UUID version</label>
+          <div class="radio-pills" role="radiogroup" aria-labelledby="version-label">
+            <span class="pill-option">
+              <input type="radio" name="uuid-version" id="v-v4" value="v4" checked>
+              <label for="v-v4">Version 4 (Random)</label>
+            </span>
+            <span class="pill-option">
+              <input type="radio" name="uuid-version" id="v-v1" value="v1">
+              <label for="v-v1">Version 1 (Time-based)</label>
+            </span>
+          </div>
+          <p class="field-hint">Version 1 uses a randomly generated node ID instead of a MAC address — see <a href="#versions">how versions work</a>.</p>
+
+          <label class="field-label" id="count-label">How many?</label>
+          <div class="count-pills" role="radiogroup" aria-labelledby="count-label">
+            <span class="pill-option"><input type="radio" name="uuid-count" id="c-1" value="1" checked><label for="c-1">1</label></span>
+            <span class="pill-option"><input type="radio" name="uuid-count" id="c-5" value="5"><label for="c-5">5</label></span>
+            <span class="pill-option"><input type="radio" name="uuid-count" id="c-10" value="10"><label for="c-10">10</label></span>
+            <span class="pill-option"><input type="radio" name="uuid-count" id="c-25" value="25"><label for="c-25">25</label></span>
+            <span class="pill-option"><input type="radio" name="uuid-count" id="c-50" value="50"><label for="c-50">50</label></span>
+            <span class="pill-option"><input type="radio" name="uuid-count" id="c-100" value="100"><label for="c-100">100</label></span>
+          </div>
+
+          <label class="field-label">Formatting</label>
+          <label class="check-row" for="opt-uppercase">
+            <input type="checkbox" id="opt-uppercase">
+            Uppercase
+          </label>
+          <label class="check-row" for="opt-no-hyphens">
+            <input type="checkbox" id="opt-no-hyphens">
+            Remove hyphens
+          </label>
+          <label class="check-row" for="opt-braces">
+            <input type="checkbox" id="opt-braces">
+            Wrap in braces { }
+          </label>
+
+          <button type="button" class="btn btn-primary generate-btn" id="generate-btn">Generate UUIDs</button>
+
+          <div class="switch-row">
+            <span>Auto-regenerate</span>
+            <label class="switch">
+              <input type="checkbox" id="auto-toggle" aria-label="Toggle auto-regenerate every 2.5 seconds">
+              <span class="track"></span>
+              <span class="thumb"></span>
+            </label>
+          </div>
+
+          <p class="kbd-hint" style="margin-top:20px;">
+            <span><kbd>G</kbd> generate</span>
+            <span><kbd>C</kbd> copy all</span>
+            <span><kbd>A</kbd> auto-regen</span>
+            <span><kbd>/</kbd> search</span>
+          </p>
+        </div>
+
+        <!-- Output panel -->
+        <div class="panel output-panel" id="output-panel">
+          <h3 class="panel-title">Output</h3>
+
+          <div class="output-toolbar">
+            <div class="search-wrap">
+              <label class="visually-hidden" for="search-filter">Search generated UUIDs</label>
+              <input type="search" id="search-filter" placeholder="Search within results…" aria-label="Search within generated UUIDs">
+            </div>
+            <div class="toolbar-actions">
+              <button type="button" class="btn btn-secondary btn-sm" id="copy-all-btn">Copy all</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="download-txt-btn">Download TXT</button>
+              <button type="button" class="btn btn-secondary btn-sm" id="download-csv-btn">Download CSV</button>
+              <button type="button" class="btn btn-ghost btn-sm" id="clear-btn">Clear all</button>
+            </div>
+          </div>
+
+          <div class="output-meta" id="output-meta" role="status" aria-live="polite"></div>
+
+          <div class="output-box" id="output-box" aria-live="polite" aria-label="Generated UUIDs"></div>
+          <span id="gen-timestamp" class="visually-hidden"></span>
+          <span id="gen-count" class="visually-hidden"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ VALIDATOR ============ -->
+  <section class="section-alt" id="validator">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Check any UUID</p>
+        <h2>UUID validator</h2>
+        <p class="section-lede">Paste a UUID from anywhere — a database row, a log line, an API response — and see instantly whether it's valid, and which version and variant it is.</p>
+      </div>
+      <div class="validator-grid">
+        <div class="panel">
+          <label class="field-label" for="validator-input">Paste a UUID</label>
+          <textarea id="validator-input" placeholder="e.g. 123e4567-e89b-12d3-a456-426614174000" aria-describedby="validator-hint"></textarea>
+          <p class="field-hint" id="validator-hint">Braces and mixed case are both fine — this checks the underlying value.</p>
+        </div>
+        <div class="panel result-card" id="result-card" role="status" aria-live="polite"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LEARN: WHAT IS UUID / GUID ============ -->
+  <section id="learn">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Learn</p>
+        <h2>What is a UUID?</h2>
+        <p class="section-lede">A Universally Unique Identifier (UUID) is a 128-bit value used to identify information in computer systems, standardized by RFC 9562 (formerly RFC 4122). It's written as 32 hexadecimal characters split into five groups by hyphens — for example <code>f47ac10b-58cc-4372-a567-0e02b2c3d479</code>. What makes UUIDs useful is that any system can generate one on its own, with no central registry or coordination, while keeping the chance of two systems ever producing the same value effectively at zero.</p>
+      </div>
+
+      <div class="section-head">
+        <h2>What is a GUID?</h2>
+        <p class="section-lede">A GUID (Globally Unique Identifier) is Microsoft's name for the exact same 128-bit identifier format. You'll see "GUID" used throughout .NET, Windows, SQL Server, and Active Directory documentation, and "UUID" used in the RFC standard, Unix-family systems, and most other languages and databases. Structurally and functionally, a GUID and a UUID are identical — the difference is purely naming convention by ecosystem.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ UUID VS GUID TABLE ============ -->
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Side by side</p>
+        <h2>UUID vs GUID</h2>
+      </div>
+      <table class="compare-table">
+        <thead>
+          <tr><th>Aspect</th><th>UUID</th><th>GUID</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Full name</td><td>Universally Unique Identifier</td><td>Globally Unique Identifier</td></tr>
+          <tr><td>Defined by</td><td>RFC 9562 / RFC 4122 (IETF)</td><td>Microsoft (same underlying spec)</td></tr>
+          <tr><td>Structure</td><td>128-bit, 8-4-4-4-12 hex groups</td><td>128-bit, 8-4-4-4-12 hex groups</td></tr>
+          <tr><td>Common ecosystems</td><td>Unix/Linux, Java, Python, PostgreSQL</td><td>.NET, Windows, SQL Server, COM</td></tr>
+          <tr><td>Typical casing</td><td>Lowercase</td><td>Often uppercase in tooling output</td></tr>
+          <tr><td>Practical difference</td><td colspan="2">None — the values are interchangeable. This generator can format either style.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ VERSIONS EXPLAINED ============ -->
+  <section id="versions">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Under the hood</p>
+        <h2>UUID versions explained</h2>
+        <p class="section-lede">The version is a single hex digit embedded in the UUID itself, so any system can tell how a given UUID was constructed. This tool supports the two most commonly used versions.</p>
+      </div>
+      <div class="version-grid">
+        <article class="version-card">
+          <h3><span class="v-num">v4</span> Random</h3>
+          <p>122 bits come from a cryptographically secure random number generator; the remaining 6 bits mark the version and variant. No timestamp, no machine identifier, no sequence — just randomness. This is the default choice for most modern applications because it requires no coordination between systems.</p>
+        </article>
+        <article class="version-card">
+          <h3><span class="v-num">v1</span> Time-based</h3>
+          <p>Encodes a 60-bit timestamp (100-nanosecond ticks since October 15, 1582), a clock sequence, and a 48-bit node identifier that was traditionally a machine's MAC address. Because a MAC address can leak information about the device and network that created a record, RFC 9562 explicitly permits substituting a random node ID instead — which is what this generator does.</p>
+        </article>
+        <article class="version-card">
+          <h3><span class="v-num">v3</span> Name-based (MD5)</h3>
+          <p>Deterministically derived by hashing a namespace UUID and a name string with MD5. The same namespace and name always produce the same UUID, which makes v3 useful when you need a repeatable identifier — but MD5's weaknesses mean v5 is generally preferred today. Not generated by this tool.</p>
+        </article>
+        <article class="version-card">
+          <h3><span class="v-num">v5</span> Name-based (SHA-1)</h3>
+          <p>The same idea as v3, but hashed with SHA-1 instead of MD5, making it the recommended choice whenever you need a deterministic, repeatable UUID from a namespace and name — for example, converting a URL into a stable identifier. Not generated by this tool.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMMON USES ============ -->
+  <section class="section-alt">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Where they show up</p>
+        <h2>Common uses for UUIDs</h2>
+      </div>
+      <div class="uses-grid">
+        <article>
+          <h3>Database primary keys</h3>
+          <p>Generated client-side or by the database, avoiding the coordination that auto-increment IDs need across shards or replicas.</p>
+        </article>
+        <article>
+          <h3>Distributed systems</h3>
+          <p>Multiple independent services can each generate IDs without checking with a central counter, since collisions are practically impossible.</p>
+        </article>
+        <article>
+          <h3>Session and request IDs</h3>
+          <p>Tagging a user session, an API request, or a trace through a system for logging and debugging.</p>
+        </article>
+        <article>
+          <h3>File and object naming</h3>
+          <p>Uploaded files, generated documents, and cloud storage objects are often named with a UUID to guarantee no collisions.</p>
+        </article>
+        <article>
+          <h3>Idempotency keys</h3>
+          <p>Attaching a UUID to a payment or write request so retries can be safely recognized and deduplicated by the receiving system.</p>
+        </article>
+        <article>
+          <h3>Testing and seed data</h3>
+          <p>Generating realistic-looking IDs in bulk for fixtures, demos, and load testing without touching production data.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DEVELOPER EXAMPLES ============ -->
+  <section id="examples">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">In your language</p>
+        <h2>Generating a UUID v4 in code</h2>
+        <p class="section-lede">Reference snippets for generating a random UUID natively, without extra dependencies.</p>
+      </div>
+      <div class="code-tabs" role="tablist" aria-label="Code language">
+        <button type="button" class="code-tab active" data-lang="js" role="tab" aria-selected="true">JavaScript</button>
+        <button type="button" class="code-tab" data-lang="python" role="tab" aria-selected="false">Python</button>
+        <button type="button" class="code-tab" data-lang="csharp" role="tab" aria-selected="false">C#</button>
+        <button type="button" class="code-tab" data-lang="sql" role="tab" aria-selected="false">SQL (Postgres)</button>
+        <button type="button" class="code-tab" data-lang="java" role="tab" aria-selected="false">Java</button>
+      </div>
+      <div class="code-block active" id="code-js"><pre>// Browser or Node 19+
+const id = crypto.randomUUID();
+console.log(id); // e.g. "3fa85f64-5717-4562-b3fc-2c963f66afa6"</pre></div>
+      <div class="code-block" id="code-python"><pre>import uuid
+
+id = uuid.uuid4()
+print(id)  # e.g. 3fa85f64-5717-4562-b3fc-2c963f66afa6</pre></div>
+      <div class="code-block" id="code-csharp"><pre>using System;
+
+Guid id = Guid.NewGuid();
+Console.WriteLine(id);
+// e.g. 3fa85f64-5717-4562-b3fc-2c963f66afa6</pre></div>
+      <div class="code-block" id="code-sql"><pre>-- PostgreSQL 13+
+SELECT gen_random_uuid();
+
+-- Older Postgres (needs extension)
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+SELECT uuid_generate_v4();</pre></div>
+      <div class="code-block" id="code-java"><pre>import java.util.UUID;
+
+UUID id = UUID.randomUUID();
+System.out.println(id);
+// e.g. 3fa85f64-5717-4562-b3fc-2c963f66afa6</pre></div>
+    </div>
+  </section>
+
+  <!-- ============ WHY ============ -->
+  <section class="section-alt" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why this generator</p>
+        <h2>Built with the same no-backend rule as every Signal tool</h2>
+        <p class="section-lede">No accounts, no servers, no limits — just a static page that does exactly what it says.</p>
+      </div>
+      <div class="gap-grid">
+        <article class="gap-card">
+          <span class="gap-mark">◆</span>
+          <h3>Cryptographically random</h3>
+          <p>Version 4 UUIDs come from the Web Crypto API's getRandomValues, the same secure random source browsers use for cryptography — not Math.random.</p>
+        </article>
+        <article class="gap-card">
+          <span class="gap-mark">◆</span>
+          <h3>Nothing ever leaves your browser</h3>
+          <p>Generation, validation, and export all happen locally in JavaScript. There's no server for your UUIDs to be sent to, because there is no server.</p>
+        </article>
+        <article class="gap-card">
+          <span class="gap-mark">◆</span>
+          <h3>Built for real workflows</h3>
+          <p>Bulk generation, CSV export, search-in-list, and a validator cover the actual day-to-day tasks developers reach for a UUID tool to do.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Questions</p>
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq-list">
+        <details><summary>What is a UUID?</summary><p>A UUID (Universally Unique Identifier) is a 128-bit number, usually written as 32 hex digits in five groups (8-4-4-4-12), used to identify information without needing a central authority to hand out IDs.</p></details>
+        <details><summary>What is the difference between a UUID and a GUID?</summary><p>They are effectively the same 128-bit identifier. GUID is Microsoft's name for the format, used across .NET and Windows, while UUID is the name used in the RFC 9562 standard followed everywhere else.</p></details>
+        <details><summary>Is this UUID generator really free?</summary><p>Yes. Every version, batch size, formatting option, and export format on this page is free to use, with no signup and no limit on how many times you generate.</p></details>
+        <details><summary>Are the UUIDs generated here truly random?</summary><p>Version 4 UUIDs are generated using the Web Crypto API's getRandomValues, a cryptographically secure random number source built into your browser, not Math.random.</p></details>
+        <details><summary>What is a Version 4 UUID?</summary><p>A Version 4 UUID is generated from 122 random bits, with a handful of fixed bits marking its version and variant. It's the most common UUID type because it needs no coordination or shared state to avoid collisions.</p></details>
+        <details><summary>What is a Version 1 UUID?</summary><p>A Version 1 UUID encodes the creation timestamp plus a node identifier, traditionally a MAC address. Since browsers cannot read hardware MAC addresses, and RFC 9562 explicitly permits it, this tool substitutes a random node ID for privacy.</p></details>
+        <details><summary>Can two UUIDs ever collide?</summary><p>In theory yes, in practice no. A Version 4 UUID has about 5.3 x 10^36 possible values, so even generating billions per second for years leaves the odds of a collision effectively zero.</p></details>
+        <details><summary>What are UUIDs commonly used for?</summary><p>Database primary keys, distributed system record IDs, session tokens, file and object names, API request IDs, and any situation where multiple systems need to generate unique IDs independently.</p></details>
+        <details><summary>Can I generate more than one UUID at a time?</summary><p>Yes. Choose 1, 5, 10, 25, 50, or 100 UUIDs per batch, then copy them all, search within the list, or export the whole batch as a TXT or CSV file.</p></details>
+        <details><summary>How do I validate a UUID?</summary><p>Paste it into the validator on this page. It instantly checks the 8-4-4-4-12 format, reports whether it's valid, and identifies the version and variant, accepting values with or without surrounding braces.</p></details>
+        <details><summary>Is it safe to use a UUID as a security token or password?</summary><p>A Version 4 UUID's 122 random bits give it strong unpredictability, similar in strength to a long random token, but purpose-built secret generators are still recommended for passwords and API keys since UUIDs are designed for uniqueness, not secrecy guarantees.</p></details>
+        <details><summary>What does the nil UUID mean?</summary><p>The nil UUID, 00000000-0000-0000-0000-000000000000, is a special reserved value meaning no UUID is present, similar to how null represents an absent value in code.</p></details>
+        <details><summary>Do the UUIDs generated here get sent to a server?</summary><p>No. Every UUID is generated locally in your browser using JavaScript, and nothing you generate, validate, or export is ever transmitted anywhere.</p></details>
+        <details><summary>What's the difference between uppercase and lowercase UUIDs?</summary><p>Both represent the same value — hex digits are case-insensitive. RFC 9562 recommends lowercase for output, but some systems like older Microsoft tooling display GUIDs in uppercase; this generator supports either.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SHARE ============ -->
+  <section id="share-section" aria-label="Share this tool">
+    <div class="wrap share-row">
+      <p class="share-label">Know a developer who needs this?</p>
+      <div class="share-buttons">
+        <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://api.whatsapp.com/send?text=Free%20UUID%2FGUID%20generator%20with%20bulk%20export%20and%20a%20validator%3A%20https%3A%2F%2Fsignal-qr.example.com%2Fuuid-generator%2F">WhatsApp</a>
+        <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsignal-qr.example.com%2Fuuid-generator%2F">Facebook</a>
+        <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fsignal-qr.example.com%2Fuuid-generator%2F&text=Free%20browser-based%20UUID%2FGUID%20generator%20with%20bulk%20export%20and%20a%20validator">X</a>
+        <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://t.me/share/url?url=https%3A%2F%2Fsignal-qr.example.com%2Fuuid-generator%2F&text=Free%20UUID%2FGUID%20generator">Telegram</a>
+        <a class="btn btn-ghost btn-sm" target="_blank" rel="noopener" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fsignal-qr.example.com%2Fuuid-generator%2F">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CROSS-LINK ============ -->
+  <section class="section-alt">
+    <div class="wrap crosslink-strip">
+      More free tools:
+      <a href="../qr-code-generator/">QR Code Generator</a> ·
+      <a href="../image-compressor/">Image Compressor</a> ·
+      <a href="../index.html">See all tools</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <a href="../index.html" class="brand" aria-label="Signal — home">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+        Signal
+      </a>
+      <p class="footer-tagline">A free, private UUID/GUID generator with bulk export and built-in validation.</p>
+    </div>
+    <nav aria-label="Footer">
+      <h4>Explore</h4>
+      <a href="../index.html">All tools</a>
+      <a href="#generator">Generator</a>
+      <a href="#validator">Validator</a>
+      <a href="#learn">Learn</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <nav aria-label="Legal">
+      <h4>Company</h4>
+      <a href="mailto:hello@signal-qr.example.com">Contact</a>
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../terms.html">Terms</a>
+      <a href="../sitemap.xml">Sitemap</a>
+    </nav>
+    <div>
+      <h4>About</h4>
+      <p>Signal runs entirely in your browser — no UUID you generate or validate is ever sent to a server.</p>
+      <div class="footer-social" aria-label="Social links">
+        <a href="https://x.com/" target="_blank" rel="noopener" aria-label="Signal on X">X</a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Signal on Instagram">IG</a>
+        <a href="https://linkedin.com/" target="_blank" rel="noopener" aria-label="Signal on LinkedIn">in</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>© <span id="footer-year"></span> Signal Toolkit. All UUIDs generated here are yours to use freely.</p>
+  </div>
+</footer>
+
+<div class="toast-region" id="toast-region" aria-live="polite"></div>
+
+<script src="script.js" defer></script>
+</body>
+</html>
